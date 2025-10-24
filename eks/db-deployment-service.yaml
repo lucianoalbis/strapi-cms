@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: strapi-db
 spec:
-  replicas: 10
+  replicas: 0
   selector:
     matchLabels:
       app: strapi-db
