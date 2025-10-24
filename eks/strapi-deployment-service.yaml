@@ -25,6 +25,18 @@ spec:
                 sleep 2
               done
               echo "Postgres is up!"
+      initContainers:
+        - name: init-strapi-public
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              mkdir -p /opt/app/public/uploads
+              chmod -R 777 /opt/app/public
+          volumeMounts:
+            - name: strapi-storage
+              mountPath: /opt/app/public      
       containers:
         - name: strapi
           image: lucianoalbis/teste-img-cms:v2
