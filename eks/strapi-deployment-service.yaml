@@ -63,7 +63,7 @@ spec:
               value: "http://strapi:1337"
           volumeMounts:
             - name: strapi-storage
-              mountPath: /opt/app/public   # Diretório de uploads do Strapi
+              mountPath: /opt/app/public
       volumes:
         - name: strapi-storage
           persistentVolumeClaim:
