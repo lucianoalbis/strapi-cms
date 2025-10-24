@@ -60,7 +60,7 @@ spec:
             - name: PORT
               value: "1337"
             - name: STRAPI_ADMIN_BACKEND_URL
-              value: "http://192.168.49.2:31337"
+              value: "http://strapi:1337"
           volumeMounts:
             - name: strapi-storage
               mountPath: /opt/app/public   # Diretório de uploads do Strapi
