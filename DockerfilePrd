@@ -1,0 +1,26 @@
+# Use Node 20 Alpine
+FROM node:20-alpine
+
+# Instala dependências básicas
+RUN apk add --no-cache python3 make g++ bash
+
+# Ativa Corepack e versão correta do Yarn
+RUN corepack enable
+RUN corepack prepare yarn@4.5.0 --activate
+
+WORKDIR /opt/app
+
+# Copia arquivos de dependências e instala
+COPY package.json yarn.lock ./
+RUN yarn install --production
+
+# Copia todo o código
+COPY . .
+
+# Build admin (necessário para produção)
+RUN yarn build
+
+EXPOSE 1337
+
+# Inicia Strapi
+CMD ["yarn", "start"]

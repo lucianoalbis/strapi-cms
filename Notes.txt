@@ -1,0 +1,83 @@
+Releases: https://github.com/strapi/strapi/releases
+Versão utilizada por nós: @strapi/strapiv5
+Bancos suportados: https://docs.strapi.io/cms/configurations/database
+Banco utilizado: postgres
+
+Run application
+cd /home/lucianosilva/Documents/projects/pocs/cms/afya-strapi-app
+docker-compose down (Caso já tenho rodado essa aplicação antes e tenha problemas com lixo)
+docker-compose up --build
+
+==================
+Resumo de requisitos dados a DOC - Strapi.io v5
+==================
+
+POC Afya
+
+Releases: https://github.com/strapi/strapi/releases
+Versão utilizada por nós: @strapi/strapiv5
+Bancos suportados: https://docs.strapi.io/cms/configurations/database
+Banco utilizado: postgres
+
+Backend / Ambiente
+
+    -> Linguagem de programação: Node.js (JavaScript / TypeScript) 
+    -> Sistema de execução: Node.js (somente versões LTS ou Maintenance LTS) — versões “current” ímpares não são suportadas. 
+    -> Gerenciador de pacotes: npm, yarn ou pnpm são suportados. 
+    -> Python: necessário apenas se estiver usando SQLite como banco de dados (para compilação nativa ou dependências) 
+    -> Ferramentas de compilação: depende do SO — e.g. build-essentials no Debian/Ubuntu para compilar extensões ou dependências nativas. 
+
+Frontend
+
+Strapi é um headless CMS, ou seja:
+    -> O frontend é agnóstico: pode ser qualquer framework ou tecnologia (React, Next.js, Vue, Angular, mobile apps, etc.). 
+    -> A administração interna possui painel baseado em React (customizável) mas isso não impõe restrições ao frontend. 
+
+Banco de dados
+
+Strapi suporta (SQL, não NoSQL) os seguintes bancos oficiais:
+    -> PostgreSQL: Várias versões recentes, dependendo da documentação — Strapi suporta “postgres” como cliente
+    -> MySQL / MariaDB: Suportado via driver adequado (e.g. mysql2)
+    -> Suportado, frequentemente usado para desenvolvimento local
+    
+    Nota: Atenção: MongoDB não é mais suportado nativamente nas versões recentes do Strapi (v5).
+
+Sistema operacional compatível
+    -> Ubuntu (LTS): 22.04 recomendado, versões como 20.04 como mínimo
+    -> Debian: 11.x recomendado, versões anteriores mínimas documentadas
+    -> CentOS / RHEL: versões mais recentes (ex: RHEL 9 recomendado, RHEL 8 como mínimo)
+    -> macOS: versões recentes (ex: 11.0+, dependendo da documentação)
+    -> Windows: Windows Desktop (10,11) são suportados oficialmente segundo documentação
+
+Hardware mínimo/recomendado (para produção)
+
+    -> CPU: mínimo 1 core, recomendado 2 ou mais
+    -> Memória RAM: mínimo ~2 GB, recomendado 4 GB+
+    -> Espaço em disco: recomenda-se mais espaço (sem menos ~8 GB como mínimo, recomendações maiores para produção)
+
+======
+Events
+======
+
+Usar Webhooks nativos do Strapi
+
+O Strapi tem suporte a Webhooks via painel admin.
+
+📍 Caminho:
+Settings → Webhooks → Create new webhook
+
+Você define:
+
+Nome: Publicação de artigo
+
+URL: https://meuapp.com/strapi-event
+
+Triggers: “entry.create”, “entry.update”, “entry.publish” etc.
+
+🟢 O Strapi envia um POST JSON com os dados do evento.
+
+🔹 Vantagem:
+Simples, configurável no admin, sem código.
+
+🔹 Desvantagem:
+Menos flexível (não dá pra transformar o payload ou condicionar eventos).

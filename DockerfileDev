@@ -1,0 +1,37 @@
+# Use Node 20 baseado em Debian
+FROM node:20-bullseye
+
+# Instala dependências do sistema necessárias para Strapi
+RUN apt-get update && apt-get install -y \
+    python3 \
+    make \
+    g++ \
+    libc6-dev \
+    libvips-dev \
+    pkg-config \
+    bash \
+    git \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /opt/app
+
+# Ativa Corepack e Yarn 4
+RUN corepack enable
+RUN corepack prepare yarn@4.5.0 --activate
+
+# Copia package.json
+COPY package.json ./ .yarnrc.yml ./
+
+# Instala dependências
+RUN yarn install
+
+# Gera build front admin
+RUN yarn build
+
+# Copia todo o código
+COPY . .
+
+EXPOSE 1337
+
+# Inicia Strapi em modo desenvolvimento
+CMD ["yarn", "develop"]
