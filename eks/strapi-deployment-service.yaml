@@ -91,9 +91,9 @@ spec:
   capacity:
     storage: 1Gi
   accessModes:
-    - ReadWriteMany   # Permite múltiplos pods lerem e escreverem
+    - ReadWriteMany
   hostPath:
-    path: /mnt/data/strapi   # Diretório do Minikube host
+    path: /mnt/data/strapi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
