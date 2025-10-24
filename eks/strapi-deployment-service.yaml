@@ -47,7 +47,8 @@ spec:
               value: "0.0.0.0"
             - name: PORT
               value: "1337"
-
+            - name: STRAPI_ADMIN_BACKEND_URL
+              value: "http://192.168.49.2:31337"
 ---
 apiVersion: v1
 kind: Service
