@@ -81,3 +81,17 @@ Simples, configurável no admin, sem código.
 
 🔹 Desvantagem:
 Menos flexível (não dá pra transformar o payload ou condicionar eventos).
+
+==========
+ArgoCD Minikube
+==========
+
+Add ArgoCD no minikube
+-> curl -L -o install.yaml https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+-> kubectl apply -n argocd -f install.yaml
+(Wait finaly pending)
+-> kubectl get pods -n argocd
+(Get password)
+-> kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
+(port-forward to access front ArgoCD)
+kubectl port-forward svc/argocd-server -n argocd 8080:443
