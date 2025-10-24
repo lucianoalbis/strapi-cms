@@ -39,7 +39,7 @@ spec:
               mountPath: /opt/app/public      
       containers:
         - name: strapi
-          image: lucianoalbis/teste-img-cms:v2
+          image: lucianoalbis/teste-img-cms:v3
           ports:
             - containerPort: 1337
           env:
