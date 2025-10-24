@@ -12,6 +12,19 @@ spec:
       labels:
         app: strapi
     spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              echo "Waiting for Postgres..."
+              until nc -z strapi-db 5432; do
+                echo "Postgres not ready, waiting..."
+                sleep 2
+              done
+              echo "Postgres is up!"
       containers:
         - name: strapi
           image: lucianoalbis/teste-img-cms:v2
@@ -42,9 +55,9 @@ metadata:
   name: strapi
 spec:
   type: NodePort
-  ports:
-    - port: 1337       # porta do serviço
-      targetPort: 1337 # porta do container
-      nodePort: 31337  # porta externa acessível
   selector:
     app: strapi
+  ports:
+    - port: 1337
+      targetPort: 1337
+      nodePort: 31337

@@ -31,7 +31,8 @@ kind: Service
 metadata:
   name: strapi-db
 spec:
-  ports:
-    - port: 5432
   selector:
     app: strapi-db
+  ports:
+    - port: 5432
+      targetPort: 5432
